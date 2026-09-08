@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grandma's Recipe</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ── Reset & base ── */
+*,
+*::before,
+*::after {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+:root {
+--pink-primary: #ff6b8a;
+--pink-secondary: #ff8fa3;
+--pink-light: #ffb3c6;
+--pink-lighter: #ffe5ec;
+--pink-bg: #fff5f7;
+--white: #ffffff;
+--text-dark: #3d2c2e;
+--text-soft: #5e4a4d;
+--shadow-sm: 0 4px 20px rgba(255, 107, 138, 0.12);
+--shadow-hover: 0 12px 40px rgba(255, 107, 138, 0.22);
+--radius: 20px;
+--radius-sm: 12px;
+--transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+background: var(--pink-bg);
+color: var(--text-dark);
+line-height: 1.6;
+overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+font-family: 'Playfair Display', serif;
+font-weight: 700;
+letter-spacing: -0.01em;
+}
+
+a {
+text-decoration: none;
+color: inherit;
+}
+img {
+max-width: 100%;
+display: block;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 24px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+width: 8px;
+}
+::-webkit-scrollbar-track {
+background: var(--pink-lighter);
+}
+::-webkit-scrollbar-thumb {
+background: var(--pink-primary);
+border-radius: 10px;
+}
+
+/* ── Header ── */
+.header {
+background: rgba(255, 255, 255, 0.82);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+border-bottom: 2px solid rgba(255, 107, 138, 0.10);
+position: sticky;
+top: 0;
+z-index: 100;
+padding: 14px 0;
+transition: var(--transition);
+}
+
+.header .container {
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 16px;
+}
+
+.logo {
+display: flex;
+align-items: center;
+gap: 14px;
+}
+
+.logo svg {
+width: 54px;
+height: 54px;
+flex-shrink: 0;
+filter: drop-shadow(0 2px 8px rgba(255, 107, 138, 0.20));
+transition: var(--transition);
+}
+
+.logo:hover svg {
+transform: scale(1.04) rotate(-2deg);
+}
+
+.logo-text {
+font-family: 'Playfair Display', serif;
+font-size: 1.6rem;
+font-weight: 700;
+color: var(--text-dark);
+letter-spacing: -0.02em;
+}
+.logo-text span {
+color: var(--pink-primary);
+}
+
+.nav {
+display: flex;
+align-items: center;
+gap: 32px;
+}
+
+.nav a {
+font-weight: 500;
+font-size: 0.95rem;
+color: var(--text-soft);
+transition: var(--transition);
+position: relative;
+}
+
+.nav a::after {
+content: '';
+position: absolute;
+bottom: -4px;
+left: 0;
+width: 0;
+height: 2.5px;
+background: var(--pink-primary);
+border-radius: 4px;
+transition: var(--transition);
+}
+
+.nav a:hover {
+color: var(--pink-primary);
+}
+.nav a:hover::after {
+width: 100%;
+}
+
+.nav .btn-nav {
+background: var(--pink-primary);
+color: #fff;
+padding: 10px 26px;
+border-radius: 50px;
+font-weight: 600;
+font-size: 0.9rem;
+transition: var(--transition);
+box-shadow: 0 4px 14px rgba(255, 107, 138, 0.30);
+}
+
+.nav .btn-nav::after {
+display: none;
+}
+.nav .btn-nav:hover {
+background: #e85a7a;
+transform: translateY(-2px);
+box-shadow: 0 8px 24px rgba(255, 107, 138, 0.40);
+color: #fff;
+}
+
+/* Hamburger */
+.hamburger {
+display: none;
+flex-direction: column;
+gap: 5px;
+cursor: pointer;
+padding: 4px;
+background: none;
+border: none;
+}
+.hamburger span {
+width: 28px;
+height: 3px;
+background: var(--text-dark);
+border-radius: 6px;
+transition: var(--transition);
+}
+
+/* ── Hero ── */
+.hero {
+padding: 60px 0 70px;
+background: linear-gradient(135deg, #fff5f7 0%, #ffe5ec 100%);
+position: relative;
+overflow: hidden;
+}
+
+.hero::before {
+content: '';
+position: absolute;
+top: -30%;
+right: -10%;
+width: 500px;
+height: 500px;
+background: radial-gradient(circle, rgba(255, 179, 198, 0.30) 0%, transparent 70%);
+border-radius: 50%;
+pointer-events: none;
+}
+
+.hero::after {
+content: '';
+position: absolute;
+bottom: -20%;
+left: -8%;
+width: 400px;
+height: 400px;
+background: radial-gradient(circle, rgba(255, 107, 138, 0.10) 0%, transparent 70%);
+border-radius: 50%;
+pointer-events: none;
+}
+
+.hero .container {
+position: relative;
+z-index: 2;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 50px;
+align-items: center;
+}
+
+.hero-content h1 {
+font-size: 3.6rem;
+line-height: 1.15;
+margin-bottom: 18px;
+color: var(--text-dark);
+}
+
+.hero-content h1 span {
+color: var(--pink-primary);
+position: relative;
+}
+
+.hero-content h1 span::after {
+content: '❤️';
+font-size: 2rem;
+margin-left: 6px;
+}
+
+.hero-content p {
+font-size: 1.15rem;
+color: var(--text-soft);
+max-width: 460px;
+margin-bottom: 32px;
+line-height: 1.8;
+}
+
+.hero-buttons {
+display: flex;
+flex-wrap: wrap;
+gap: 16px;
+}
+
+.btn-primary {
+background: var(--pink-primary);
+color: #fff;
+padding: 14px 38px;
+border-radius: 50px;
+font-weight: 600;
+font-size: 1rem;
+transition: var(--transition);
+box-shadow: 0 4px 18px rgba(255, 107, 138, 0.35);
+display: inline-flex;
+align-items: center;
+gap: 10px;
+}
+
+.btn-primary:hover {
+background: #e85a7a;
+transform: translateY(-3px);
+box-shadow: 0 10px 32px rgba(255, 107, 138, 0.45);
+}
+
+.btn-secondary {
+background: var(--white);
+color: var(--text-dark);
+padding: 14px 34px;
+border-radius: 50px;
+font-weight: 600;
+font-size: 1rem;
+transition: var(--transition);
+border: 2px solid var(--pink-light);
+display: inline-flex;
+align-items: center;
+gap: 10px;
+}
+
+.btn-secondary:hover {
+border-color: var(--pink-primary);
+color: var(--pink-primary);
+transform: translateY(-3px);
+box-shadow: 0 8px 24px rgba(255, 107, 138, 0.12);
+}
+
+.hero-stats {
+display: flex;
+gap: 40px;
+margin-top: 40px;
+padding-top: 32px;
+border-top: 2px solid rgba(255, 107, 138, 0.12);
+}
+
+.hero-stats .stat h3 {
+font-size: 1.8rem;
+color: var(--pink-primary);
+font-family: 'Playfair Display', serif;
+}
+.hero-stats .stat p {
+font-size: 0.9rem;
+color: var(--text-soft);
+font-weight: 500;
+}
+
+.hero-image {
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+}
+
+.hero-image .decoration {
+position: absolute;
+width: 300px;
+height: 300px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(255, 179, 198, 0.25) 0%, transparent 70%);
+z-index: 0;
+animation: float 6s ease-in-out infinite;
+}
+
+.hero-image .decoration:nth-child(2) {
+width: 200px;
+height: 200px;
+background: radial-gradient(circle, rgba(255, 107, 138, 0.12) 0%, transparent 70%);
+animation-delay: -2s;
+animation-duration: 8s;
+}
+
+.hero-image svg {
+width: 100%;
+max-width: 420px;
+height: auto;
+position: relative;
+z-index: 1;
+filter: drop-shadow(0 12px 40px rgba(255, 107, 138, 0.18));
+transition: var(--transition);
+}
+
+.hero-image svg:hover {
+transform: scale(1.02) rotate(1deg);
+}
+
+@keyframes float {
+0%,
+100% {
+transform: translateY(0px);
+}
+50% {
+transform: translateY(-18px);
+}
+}
+
+/* ── Section titles ── */
+.section-title {
+text-align: center;
+margin-bottom: 48px;
+}
+
+.section-title h2 {
+font-size: 2.6rem;
+color: var(--text-dark);
+margin-bottom: 8px;
+}
+
+.section-title h2 span {
+color: var(--pink-primary);
+}
+
+.section-title p {
+color: var(--text-soft);
+font-size: 1.05rem;
+max-width: 500px;
+margin: 0 auto;
+}
+
+/* ── Categories ── */
+.categories {
+padding: 70px 0 50px;
+}
+
+.category-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+gap: 20px;
+}
+
+.category-card {
+background: var(--white);
+padding: 28px 16px;
+border-radius: var(--radius);
+text-align: center;
+transition: var(--transition);
+box-shadow: var(--shadow-sm);
+border: 2px solid transparent;
+cursor: default;
+}
+
+.category-card:hover {
+transform: translateY(-6px);
+box-shadow: var(--shadow-hover);
+border-color: var(--pink-light);
+}
+
+.category-card .icon {
+font-size: 2.6rem;
+margin-bottom: 8px;
+}
+.category-card h4 {
+font-family: 'Inter', sans-serif;
+font-weight: 600;
+font-size: 1rem;
+color: var(--text-dark);
+}
+.category-card p {
+font-size: 0.8rem;
+color: var(--text-soft);
+margin-top: 2px;
+}
+
+/* ── Featured recipes ── */
+.featured {
+padding: 40px 0 70px;
+}
+
+.recipe-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 30px;
+}
+
+.recipe-card {
+background: var(--white);
+border-radius: var(--radius);
+overflow: hidden;
+box-shadow: var(--shadow-sm);
+transition: var(--transition);
+border: 2px solid transparent;
+}
+
+.recipe-card:hover {
+transform: translateY(-10px);
+box-shadow: var(--shadow-hover);
+border-color: var(--pink-light);
+}
+
+.recipe-card .card-img {
+height: 200px;
+background: var(--pink-lighter);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 4rem;
+position: relative;
+overflow: hidden;
+}
+
+.recipe-card .card-img .badge {
+position: absolute;
+top: 14px;
+right: 14px;
+background: var(--pink-primary);
+color: #fff;
+font-size: 0.7rem;
+font-weight: 600;
+padding: 4px 14px;
+border-radius: 50px;
+letter-spacing: 0.3px;
+}
+
+.recipe-card .card-body {
+padding: 22px 24px 26px;
+}
+
+.recipe-card .card-body h3 {
+font-family: 'Playfair Display', serif;
+font-size: 1.3rem;
+margin-bottom: 6px;
+}
+
+.recipe-card .card-body .meta {
+display: flex;
+gap: 18px;
+font-size: 0.85rem;
+color: var(--text-soft);
+margin: 10px 0 14px;
+}
+
+.recipe-card .card-body .meta span {
+display: flex;
+align-items: center;
+gap: 5px;
+}
+
+.recipe-card .card-body .desc {
+color: var(--text-soft);
+font-size: 0.95rem;
+line-height: 1.6;
+}
+
+.recipe-card .card-body .btn-recipe {
+margin-top: 16px;
+display: inline-block;
+font-weight: 600;
+color: var(--pink-primary);
+transition: var(--transition);
+font-size: 0.95rem;
+}
+
+.recipe-card .card-body .btn-recipe:hover {
+color: #e85a7a;
+transform: translateX(6px);
+}
+
+/* ── About / Story ── */
+.story {
+padding: 60px 0 70px;
+background: var(--white);
+}
+
+.story .container {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 50px;
+align-items: center;
+}
+
+.story-content h2 {
+font-size: 2.4rem;
+margin-bottom: 14px;
+}
+
+.story-content h2 span {
+color: var(--pink-primary);
+}
+
+.story-content p {
+color: var(--text-soft);
+font-size: 1.05rem;
+line-height: 1.8;
+margin-bottom: 18px;
+}
+
+.story-content .signature {
+font-family: 'Playfair Display', serif;
+font-size: 1.4rem;
+color: var(--pink-primary);
+margin-top: 8px;
+}
+
+.story-image {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.story-image svg {
+width: 100%;
+max-width: 380px;
+height: auto;
+filter: drop-shadow(0 8px 30px rgba(255, 107, 138, 0.12));
+}
+
+/* ── Newsletter ── */
+.newsletter {
+padding: 60px 0;
+background: linear-gradient(135deg, #ffe5ec 0%, #fff5f7 100%);
+}
+
+.newsletter-box {
+background: var(--white);
+border-radius: var(--radius);
+padding: 50px 40px;
+text-align: center;
+max-width: 720px;
+margin: 0 auto;
+box-shadow: var(--shadow-sm);
+border: 2px solid rgba(255, 107, 138, 0.08);
+}
+
+.newsletter-box h2 {
+font-size: 2rem;
+margin-bottom: 8px;
+}
+
+.newsletter-box h2 span {
+color: var(--pink-primary);
+}
+
+.newsletter-box p {
+color: var(--text-soft);
+margin-bottom: 24px;
+}
+
+.newsletter-form {
+display: flex;
+flex-wrap: wrap;
+gap: 12px;
+justify-content: center;
+}
+
+.newsletter-form input {
+flex: 1;
+min-width: 220px;
+padding: 14px 22px;
+border: 2px solid var(--pink-lighter);
+border-radius: 50px;
+font-size: 1rem;
+outline: none;
+transition: var(--transition);
+background: var(--pink-bg);
+}
+
+.newsletter-form input:focus {
+border-color: var(--pink-primary);
+box-shadow: 0 0 0 4px rgba(255, 107, 138, 0.10);
+}
+
+.newsletter-form button {
+background: var(--pink-primary);
+color: #fff;
+border: none;
+padding: 14px 36px;
+border-radius: 50px;
+font-weight: 600;
+font-size: 1rem;
+cursor: pointer;
+transition: var(--transition);
+box-shadow: 0 4px 14px rgba(255, 107, 138, 0.30);
+}
+
+.newsletter-form button:hover {
+background: #e85a7a;
+transform: translateY(-2px);
+box-shadow: 0 8px 28px rgba(255, 107, 138, 0.40);
+}
+
+/* ── Footer ── */
+.footer {
+background: #2d1e20;
+color: rgba(255, 255, 255, 0.80);
+padding: 50px 0 30px;
+}
+
+.footer .container {
+display: grid;
+grid-template-columns: 2fr 1fr 1fr 1fr;
+gap: 40px;
+}
+
+.footer-brand .logo-text {
+color: #fff;
+font-size: 1.5rem;
+}
+.footer-brand .logo-text span {
+color: var(--pink-light);
+}
+
+.footer-brand p {
+font-size: 0.95rem;
+margin-top: 10px;
+max-width: 280px;
+line-height: 1.7;
+opacity: 0.75;
+}
+
+.footer-social {
+display: flex;
+gap: 14px;
+margin-top: 18px;
+}
+
+.footer-social a {
+background: rgba(255, 255, 255, 0.08);
+width: 42px;
+height: 42px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.2rem;
+transition: var(--transition);
+}
+
+.footer-social a:hover {
+background: var(--pink-primary);
+transform: translateY(-3px);
+}
+
+.footer h4 {
+font-family: 'Inter', sans-serif;
+font-weight: 600;
+font-size: 1rem;
+color: #fff;
+margin-bottom: 16px;
+letter-spacing: 0.3px;
+}
+
+.footer ul {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.footer ul a {
+opacity: 0.75;
+transition: var(--transition);
+font-size: 0.95rem;
+}
+
+.footer ul a:hover {
+opacity: 1;
+color: var(--pink-light);
+}
+
+.footer-bottom {
+grid-column: 1 / -1;
+border-top: 1px solid rgba(255, 255, 255, 0.08);
+padding-top: 24px;
+margin-top: 20px;
+text-align: center;
+font-size: 0.9rem;
+opacity: 0.6;
+}
+
+/* ── Responsive ── */
+@media (max-width: 992px) {
+.hero .container {
+grid-template-columns: 1fr;
+text-align: center;
+}
+
+.hero-content p {
+margin-left: auto;
+margin-right: auto;
+}
+
+.hero-buttons {
+justify-content: center;
+}
+
+.hero-stats {
+justify-content: center;
+}
+
+.hero-image svg {
+max-width: 320px;
+}
+
+.story .container {
+grid-template-columns: 1fr;
+text-align: center;
+}
+
+.story-content p {
+margin-left: auto;
+margin-right: auto;
+}
+
+.footer .container {
+grid-template-columns: 1fr 1fr;
+}
+}
+
+@media (max-width: 768px) {
+.nav {
+display: none;
+flex-direction: column;
+width: 100%;
+background: var(--white);
+padding: 20px 0;
+border-radius: var(--radius-sm);
+box-shadow: var(--shadow-hover);
+position: absolute;
+top: 70px;
+left: 0;
+gap: 16px;
+}
+
+.nav.open {
+display: flex;
+}
+
+.hamburger {
+display: flex;
+}
+
+.hero-content h1 {
+font-size: 2.6rem;
+}
+
+.section-title h2 {
+font-size: 2rem;
+}
+
+.recipe-grid {
+grid-template-columns: 1fr 1fr;
+}
+
+.footer .container {
+grid-template-columns: 1fr;
+text-align: center;
+}
+
+.footer-brand p {
+max-width: 100%;
+}
+
+.footer-social {
+justify-content: center;
+}
+
+.newsletter-box {
+padding: 32px 20px;
+}
+
+.newsletter-form input {
+min-width: 160px;
+}
+}
+
+@media (max-width: 480px) {
+.recipe-grid {
+grid-template-columns: 1fr;
+}
+
+.hero-content h1 {
+font-size: 2.2rem;
+}
+
+.hero-stats {
+flex-direction: column;
+gap: 16px;
+align-items: center;
+}
+
+.category-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+
+.logo-text {
+font-size: 1.2rem;
+}
+.logo svg {
+width: 42px;
+height: 42px;
+}
+}
+
+/* ── Utility ── */
+.text-pink {
+color: var(--pink-primary);
+}
+.text-center {
+text-align: center;
+}
+.mt-8 {
+margin-top: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+<div class="container">
+<a href="#" class="logo">
+<!-- Grandmother holding a hot chicken – SVG logo -->
+<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="60" cy="60" r="58" fill="#ffe5ec" stroke="#ff8fa3" stroke-width="2" />
+<ellipse cx="60" cy="80" rx="28" ry="24" fill="#ffb3c6" />
+<ellipse cx="60" cy="80" rx="24" ry="20" fill="#ff8fa3" />
+<path d="M44 76 L36 68 M76 76 L84 68" stroke="#ff6b8a" stroke-width="2.5" stroke-linecap="round" />
+<circle cx="60" cy="46" r="22" fill="#fce4d6" />
+<ellipse cx="60" cy="28" rx="16" ry="10" fill="#c9b0a0" />
+<ellipse cx="60" cy="26" rx="12" ry="8" fill="#b89a88" />
+<ellipse cx="42" cy="36" rx="8" ry="10" fill="#c9b0a0" />
+<ellipse cx="78" cy="36" rx="8" ry="10" fill="#c9b0a0" />
+<circle cx="50" cy="46" r="7" fill="none" stroke="#5e4a4d" stroke-width="2" />
+<circle cx="70" cy="46" r="7" fill="none" stroke="#5e4a4d" stroke-width="2" />
+<line x1="57" y1="46" x2="63" y2="46" stroke="#5e4a4d" stroke-width="2" />
+<circle cx="50" cy="46" r="2" fill="#3d2c2e" />
+<circle cx="70" cy="46" r="2" fill="#3d2c2e" />
+<path d="M52 55 Q60 63 68 55" stroke="#d4817a" stroke-width="2" stroke-linecap="round" fill="none" />
+<ellipse cx="44" cy="52" rx="5" ry="4" fill="#ffb3c6" opacity="0.6" />
+<ellipse cx="76" cy="52" rx="5" ry="4" fill="#ffb3c6" opacity="0.6" />
+<path d="M34 70 L26 58 M86 70 L94 58" stroke="#fce4d6" stroke-width="6" stroke-linecap="round" />
+<circle cx="26" cy="56" r="5" fill="#fce4d6" />
+<circle cx="94" cy="56" r="5" fill="#fce4d6" />
+<ellipse cx="60" cy="68" rx="32" ry="8" fill="#e8d5c4" stroke="#d4b8a0" stroke-width="1.5" />
+<ellipse cx="60" cy="66" rx="28" ry="6" fill="#f0e0d0" />
+<ellipse cx="60" cy="58" rx="18" ry="12" fill="#d4a06a" />
+<ellipse cx="60" cy="56" rx="16" ry="10" fill="#e8b88a" />
+<ellipse cx="44" cy="56" rx="8" ry="5" fill="#d4a06a" transform="rotate(-20 44 56)" />
+<ellipse cx="76" cy="56" rx="8" ry="5" fill="#d4a06a" transform="rotate(20 76 56)" />
+<ellipse cx="52" cy="64" rx="6" ry="4" fill="#c8905a" />
+<ellipse cx="68" cy="64" rx="6" ry="4" fill="#c8905a" />
+<path d="M50 44 Q52 36 48 28 M60 42 Q62 34 58 26 M70 44 Q72 36 68 28" stroke="#ffb3c6" stroke-width="2" stroke-linecap="round" opacity="0.7" />
+<path d="M58 52 L60 55 L62 52 Q64 48 60 48 Q56 48 58 52Z" fill="#ff6b8a" opacity="0.6" />
+</svg>
+
+<span class="logo-text">Grandma's <span>Recipe</span></span>
+</a>
+
+<button class="hamburger" id="hamburger" aria-label="Toggle menu">
+<span></span><span></span><span></span>
+</button>
+
+<nav class="nav" id="nav">
+<a href="#recipes">Recipes</a>
+<a href="#categories">Categories</a>
+<a href="#story">Our Story</a>
+<a href="#newsletter" class="btn-nav">Subscribe</a>
+</nav>
+</div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+<div class="container">
+<div class="hero-content">
+<h1>Welcome to <span>Grandma's</span> Kitchen</h1>
+<p>
+Where every recipe tells a story — cherished family secrets,
+passed down with love, now shared with you.
+</p>
+<div class="hero-buttons">
+<a href="#recipes" class="btn-primary">Explore Recipes &nbsp;→</a>
+<a href="#story" class="btn-secondary">Our Story</a>
+</div>
+<div class="hero-stats">
+<div class="stat">
+<h3>150+</h3>
+<p>Family Recipes</p>
+</div>
+<div class="stat">
+<h3>4.9 ★</h3>
+<p>Loved by Thousands</p>
+</div>
+<div class="stat">
+<h3>60+</h3>
+<p>Years of Wisdom</p>
+</div>
+</div>
+</div>
+<div class="hero-image">
+<div class="decoration"></div>
+<div class="decoration"></div>
+<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="200" cy="200" r="180" fill="#ffe5ec" opacity="0.4" />
+<circle cx="200" cy="200" r="140" fill="#ffb3c6" opacity="0.15" />
+<ellipse cx="200" cy="260" rx="90" ry="80" fill="#ffb3c6" />
+<ellipse cx="200" cy="260" rx="80" ry="70" fill="#ff8fa3" />
+<path d="M140 250 L110 220 M260 250 L290 220" stroke="#ff6b8a" stroke-width="4" stroke-linecap="round" />
+<circle cx="200" cy="150" r="68" fill="#fce4d6" />
+<ellipse cx="200" cy="90" rx="48" ry="30" fill="#c9b0a0" />
+<ellipse cx="200" cy="84" rx="36" ry="24" fill="#b89a88" />
+<ellipse cx="146" cy="112" rx="22" ry="28" fill="#c9b0a0" />
+<ellipse cx="254" cy="112" rx="22" ry="28" fill="#c9b0a0" />
+<circle cx="174" cy="152" r="22" fill="none" stroke="#5e4a4d" stroke-width="3" />
+<circle cx="226" cy="152" r="22" fill="none" stroke="#5e4a4d" stroke-width="3" />
+<line x1="196" y1="152" x2="204" y2="152" stroke="#5e4a4d" stroke-width="3" />
+<circle cx="174" cy="152" r="6" fill="#3d2c2e" />
+<circle cx="226" cy="152" r="6" fill="#3d2c2e" />
+<path d="M174 178 Q200 198 226 178" stroke="#d4817a" stroke-width="3" stroke-linecap="round" fill="none" />
+<ellipse cx="148" cy="170" rx="16" ry="12" fill="#ffb3c6" opacity="0.5" />
+<ellipse cx="252" cy="170" rx="16" ry="12" fill="#ffb3c6" opacity="0.5" />
+<path d="M112 230 L80 190 M288 230 L320 190" stroke="#fce4d6" stroke-width="14" stroke-linecap="round" />
+<circle cx="80" cy="186" r="16" fill="#fce4d6" />
+<circle cx="320" cy="186" r="16" fill="#fce4d6" />
+<ellipse cx="200" cy="218" rx="100" ry="28" fill="#e8d5c4" stroke="#d4b8a0" stroke-width="2.5" />
+<ellipse cx="200" cy="214" rx="88" ry="20" fill="#f0e0d0" />
+<ellipse cx="200" cy="180" rx="56" ry="40" fill="#d4a06a" />
+<ellipse cx="200" cy="176" rx="50" ry="34" fill="#e8b88a" />
+<ellipse cx="144" cy="176" rx="26" ry="16" fill="#d4a06a" transform="rotate(-20 144 176)" />
+<ellipse cx="256" cy="176" rx="26" ry="16" fill="#d4a06a" transform="rotate(20 256 176)" />
+<ellipse cx="170" cy="210" rx="18" ry="12" fill="#c8905a" />
+<ellipse cx="230" cy="210" rx="18" ry="12" fill="#c8905a" />
+<path d="M164 134 Q168 110 160 86 M200 126 Q204 102 196 78 M236 134 Q240 110 232 86" stroke="#ffb3c6" stroke-width="4" stroke-linecap="round" opacity="0.7" />
+<path d="M148 140 Q152 120 144 100 M216 130 Q220 106 212 82 M252 140 Q256 120 248 100" stroke="#ffb3c6" stroke-width="3" stroke-linecap="round" opacity="0.4" />
+<path d="M190 170 L196 178 L202 170 Q208 160 196 158 Q184 160 190 170Z" fill="#ff6b8a" opacity="0.6" />
+<circle cx="120" cy="100" r="4" fill="#ffb3c6" opacity="0.5" />
+<circle cx="280" cy="100" r="4" fill="#ffb3c6" opacity="0.5" />
+<circle cx="340" cy="150" r="3" fill="#ffb3c6" opacity="0.4" />
+<circle cx="60" cy="150" r="3" fill="#ffb3c6" opacity="0.4" />
+</svg>
+</div>
+</div>
+</section>
+
+<!-- ═══ CATEGORIES ═══ -->
+<section class="categories" id="categories">
+<div class="container">
+<div class="section-title">
+<h2>Explore <span>Categories</span></h2>
+<p>From hearty mains to sweet treats — find your next favorite dish.</p>
+</div>
+<div class="category-grid">
+<div class="category-card">
+<div class="icon">🍲</div>
+<h4>Soups &amp; Stews</h4>
+<p>12 recipes</p>
+</div>
+<div class="category-card">
+<div class="icon">🍗</div>
+<h4>Main Dishes</h4>
+<p>28 recipes</p>
+</div>
+<div class="category-card">
+<div class="icon">🥗</div>
+<h4>Salads &amp; Sides</h4>
+<p>16 recipes</p>
+</div>
+<div class="category-card">
+<div class="icon">🧁</div>
+<h4>Desserts</h4>
+<p>24 recipes</p>
+</div>
+<div class="category-card">
+<div class="icon">🍞</div>
+<h4>Baked Goods</h4>
+<p>18 recipes</p>
+</div>
+<div class="category-card">
+<div class="icon">🥤</div>
+<h4>Drinks</h4>
+<p>10 recipes</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ FEATURED RECIPES ═══ -->
+<section class="featured" id="recipes">
+<div class="container">
+<div class="section-title">
+<h2>Grandma's <span>Favorites</span></h2>
+<p>Time-tested recipes that taste like a warm hug.</p>
+</div>
+<div class="recipe-grid">
+
+<div class="recipe-card">
+<div class="card-img" style="background: #fce4d6;">
+🍗
+<span class="badge">⭐ Family Secret</span>
+</div>
+<div class="card-body">
+<h3>Classic Roast Chicken</h3>
+<div class="meta">
+<span>⏱ 1h 30m</span>
+<span>🍽 6 servings</span>
+</div>
+<p class="desc">
+Golden, juicy, and seasoned with a blend of herbs passed down through generations.
+</p>
+<a href="#" class="btn-recipe">View Recipe →</a>
+</div>
+</div>
+
+<div class="recipe-card">
+<div class="card-img" style="background: #e8f0e0;">
+🥧
+<span class="badge">🥧 Classic</span>
+</div>
+<div class="card-body">
+<h3>Apple Pie with Crumble</h3>
+<div class="meta">
+<span>⏱ 1h 15m</span>
+<span>🍽 8 servings</span>
+</div>
+<p class="desc">
+Sweet, spiced apples under a buttery crumble — the smell of Grandma's kitchen.
+</p>
+<a href="#" class="btn-recipe">View Recipe →</a>
+</div>
+</div>
+
+<div class="recipe-card">
+<div class="card-img" style="background: #fdf0e0;">
+🍲
+<span class="badge">❤️ Comfort Food</span>
+</div>
+<div class="card-body">
+<h3>Hearty Beef Stew</h3>
+<div class="meta">
+<span>⏱ 2h 15m</span>
+<span>🍽 6 servings</span>
+</div>
+<p class="desc">
+Slow-cooked with root vegetables and a rich broth that warms you from the inside out.
+</p>
+<a href="#" class="btn-recipe">View Recipe →</a>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ═══ STORY ═══ -->
+<section class="story" id="story">
+<div class="container">
+<div class="story-content">
+<h2>From Our <span>Kitchen</span> to Yours</h2>
+<p>
+Grandma Margaret started writing down her recipes in a worn-out notebook
+more than 60 years ago. Every page tells a story — of family gatherings,
+laughter, and the love that only a home-cooked meal can bring.
+</p>
+<p>
+Today, we're sharing those treasured recipes with you. Each dish is made
+with the same care, warmth, and a pinch of nostalgia that makes every
+bite feel like coming home.
+</p>
+<div class="signature">— With love, Grandma</div>
+</div>
+<div class="story-image">
+<svg viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="140" cy="140" r="130" fill="#ffe5ec" opacity="0.3" />
+<circle cx="140" cy="140" r="100" fill="#ffb3c6" opacity="0.12" />
+<rect x="60" y="80" width="160" height="120" rx="12" fill="#f5ede4" stroke="#d4b8a0" stroke-width="2" />
+<line x1="80" y1="100" x2="200" y2="100" stroke="#d4b8a0" stroke-width="1.5" stroke-dasharray="4 4" />
+<line x1="80" y1="118" x2="200" y2="118" stroke="#d4b8a0" stroke-width="1.5" stroke-dasharray="4 4" />
+<line x1="80" y1="136" x2="200" y2="136" stroke="#d4b8a0" stroke-width="1.5" stroke-dasharray="4 4" />
+<line x1="80" y1="154" x2="180" y2="154" stroke="#d4b8a0" stroke-width="1.5" stroke-dasharray="4 4" />
+<path d="M130 104 L134 110 L138 104 Q142 98 134 96 Q126 98 130 104Z" fill="#ff6b8a" opacity="0.4" />
+<path d="M70 170 L90 190 M70 190 L90 170" stroke="#d4b8a0" stroke-width="3" stroke-linecap="round" />
+<circle cx="90" cy="170" r="6" fill="#f0e0d0" stroke="#d4b8a0" stroke-width="1.5" />
+</svg>
+</div>
+</div>
+</section>
+
+<!-- ═══ NEWSLETTER ═══ -->
+<section class="newsletter" id="newsletter">
+<div class="container">
+<div class="newsletter-box">
+<h2>Get <span>Fresh Recipes</span> Every Week</h2>
+<p>
+Subscribe to Grandma's newsletter and receive a new family recipe
+in your inbox every Sunday morning. 🥧
+</p>
+<form class="newsletter-form" onsubmit="event.preventDefault(); alert('💌 Thank you! You\'re now part of Grandma\'s family. Check your inbox soon!');">
+<input type="email" placeholder="Enter your email address" required />
+<button type="submit">Subscribe</button>
+</form>
+</div>
+</div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+<div class="container">
+<div class="footer-brand">
+<div class="logo-text">Grandma's <span>Recipe</span></div>
+<p>
+Preserving family traditions, one recipe at a time.
+Made with love and a little bit of butter.
+</p>
+<div class="footer-social">
+<a href="#" aria-label="Instagram">📷</a>
+<a href="#" aria-label="Facebook">📘</a>
+<a href="#" aria-label="Pinterest">📌</a>
+<a href="#" aria-label="YouTube">▶️</a>
+</div>
+</div>
+
+<div>
+<h4>Recipes</h4>
+<ul>
+<li><a href="#">Main Dishes</a></li>
+<li><a href="#">Desserts</a></li>
+<li><a href="#">Baked Goods</a></li>
+<li><a href="#">Soups &amp; Stews</a></li>
+</ul>
+</div>
+
+<div>
+<h4>Company</h4>
+<ul>
+<li><a href="#story">Our Story</a></li>
+<li><a href="#">Contact</a></li>
+<li><a href="#">Privacy Policy</a></li>
+<li><a href="#">Terms</a></li>
+</ul>
+</div>
+
+<div>
+<h4>Connect</h4>
+<ul>
+<li><a href="#">Instagram</a></li>
+<li><a href="#">Facebook</a></li>
+<li><a href="#">Pinterest</a></li>
+<li><a href="#">YouTube</a></li>
+</ul>
+</div>
+
+<div class="footer-bottom">
+&copy; 2026 Grandma's Recipe. Made with ❤️ and a pinch of nostalgia.
+</div>
+</div>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const nav = document.getElementById('nav');
+
+hamburger.addEventListener('click', () => {
+nav.classList.toggle('open');
+});
+
+nav.querySelectorAll('a').forEach(link => {
+link.addEventListener('click', () => {
+nav.classList.remove('open');
+});
+});
+</script>
+
+</body>
+</html>
